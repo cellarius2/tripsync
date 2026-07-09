@@ -11,13 +11,53 @@ using TripSync.API.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ---- Configuração ----
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
-var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>()!;
+const string CorsPolicyName = "TripSyncFrontend";
+
+// ---- Configuração JWT ----
+// Aceita tanto Jwt:Key quanto JwtKey, porque no Railway você está usando JwtKey.
+var jwtSettings = new JwtSettings();
+builder.Configuration.GetSection("Jwt").Bind(jwtSettings);
+
+jwtSettings.Key = builder.Configuration["JwtKey"]
+    ?? builder.Configuration["Jwt:Key"]
+    ?? jwtSettings.Key;
+
+jwtSettings.Issuer = builder.Configuration["Jwt:Issuer"]
+    ?? jwtSettings.Issuer;
+
+jwtSettings.Audience = builder.Configuration["Jwt:Audience"]
+    ?? jwtSettings.Audience;
+
+if (string.IsNullOrWhiteSpace(jwtSettings.Key))
+{
+    throw new InvalidOperationException("JWT Key não configurada. Configure Jwt__Key ou JwtKey nas variáveis de ambiente.");
+}
+
+builder.Services.Configure<JwtSettings>(options =>
+{
+    builder.Configuration.GetSection("Jwt").Bind(options);
+
+    options.Key = builder.Configuration["JwtKey"]
+        ?? builder.Configuration["Jwt:Key"]
+        ?? options.Key;
+
+    options.Issuer = builder.Configuration["Jwt:Issuer"]
+        ?? options.Issuer;
+
+    options.Audience = builder.Configuration["Jwt:Audience"]
+        ?? options.Audience;
+});
 
 // ---- Banco de dados ----
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (string.IsNullOrWhiteSpace(connectionString))
+{
+    throw new InvalidOperationException("ConnectionStrings__DefaultConnection não configurada.");
+}
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(connectionString));
 
 // ---- Serviços ----
 builder.Services.AddScoped<TokenService>();
@@ -34,6 +74,43 @@ builder.Services.AddScoped<IVoteService, VoteService>();
 
 builder.Services.AddScoped<IFinancialPlanningService, FinancialPlanningService>();
 builder.Services.AddScoped<IAiPlanningService, AiPlanningService>();
+
+// ---- CORS ----
+// Continua lendo Cors:AllowedOrigins, mas também aceita qualquer domínio vercel.app.
+// Isso resolve os previews da Vercel e evita quebrar por causa de barra final.
+var configuredOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>()?
+    .Select(origin => origin.TrimEnd('/'))
+    .ToArray() ?? Array.Empty<string>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(CorsPolicyName, policy =>
+    {
+        policy
+            .SetIsOriginAllowed(origin =>
+            {
+                if (string.IsNullOrWhiteSpace(origin))
+                    return false;
+
+                origin = origin.TrimEnd('/');
+
+                if (configuredOrigins.Contains(origin, StringComparer.OrdinalIgnoreCase))
+                    return true;
+
+                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                    return false;
+
+                return uri.Host.Equals("trip-sync-cellarius.vercel.app", StringComparison.OrdinalIgnoreCase)
+                    || uri.Host.EndsWith(".vercel.app", StringComparison.OrdinalIgnoreCase)
+                    || uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase);
+            })
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
 
 // ---- Autenticação JWT ----
 builder.Services.AddAuthentication(options =>
@@ -72,20 +149,6 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddAuthorization();
-
-// ---- CORS ----
-var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>() ?? Array.Empty<string>();
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("TripSyncFrontend", policy =>
-    {
-        policy.WithOrigins(allowedOrigins)
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowCredentials();
-    });
-});
 
 // ---- Controllers, Swagger, SignalR ----
 builder.Services.AddControllers().AddJsonOptions(options =>
@@ -134,17 +197,30 @@ builder.Services.AddSignalR();
 var app = builder.Build();
 
 // ---- Pipeline ----
+app.UseSwagger();
+app.UseSwaggerUI();
 
-    app.UseSwagger();
-    app.UseSwaggerUI();
+// Em Railway/Vercel, o HTTPS já fica na borda/proxy.
+// Isso evita problemas de redirect no preflight CORS.
+// app.UseHttpsRedirection();
 
+app.UseRouting();
 
-app.UseHttpsRedirection();
-app.UseCors("CorsPolicy");
+app.UseCors(CorsPolicyName);
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 app.MapHub<TripHub>("/hubs/trip");
+
+app.MapGet("/", () => Results.Ok(new
+{
+    name = "TripSync API",
+    status = "online",
+    environment = app.Environment.EnvironmentName
+}));
+
+app.MapGet("/health", () => Results.Ok("healthy"));
 
 app.Run();
