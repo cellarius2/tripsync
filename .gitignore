@@ -1,0 +1,27 @@
+# Frontend
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
+# Backend
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Logs
+*.log
+logs/
+
+# Banco local
+*.db
+*.sqlite
+*.sqlite3
+
+# Sistema/IDE
+.DS_Store
+Thumbs.db
