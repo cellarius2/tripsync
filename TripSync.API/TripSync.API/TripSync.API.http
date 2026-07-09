@@ -1,0 +1,6 @@
+@TripSync.API_HostAddress = http://localhost:5240
+
+GET {{TripSync.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
