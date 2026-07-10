@@ -2914,7 +2914,7 @@ html.dark,
   padding-inline: 0;
 }
 
-.trip-detail-main > *,
+.trip-detail-main>*,
 .trip-detail-first-fold,
 .trip-detail-top-area,
 .trip-detail-crew-section {
@@ -9427,5 +9427,145 @@ html.dark .landing-shell .orbit-logo-card {
 
   .landing-shell .orbit-pin-three {
     display: none;
+  }
+}
+
+/* =========================================================
+   TRIP DETAIL — AJUSTE FINAL DE PROPORÇÃO E RECORTE
+   - aproxima o conteúdo da navbar
+   - amplia levemente a largura
+   - aumenta principalmente a altura do primeiro bloco
+   - impede o corte vertical dos cards de tripulantes
+========================================================= */
+.trip-command-shell {
+  /* Oculta somente o excesso horizontal das decorações.
+     overflow: hidden cortava conteúdo vertical mais alto. */
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+.trip-detail-main {
+  width: min(95%, 1680px) !important;
+  max-width: 1680px !important;
+  margin-inline: auto !important;
+  margin-top: 0 !important;
+  padding-top: 12px !important;
+  padding-inline: 0 !important;
+  padding-bottom: 40px !important;
+}
+
+.trip-detail-first-fold {
+  gap: 16px !important;
+  min-height: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.trip-detail-top-area {
+  min-height: 450px !important;
+  align-items: stretch !important;
+  gap: 20px !important;
+  overflow: visible !important;
+}
+
+/* Mantém os dois lados do topo com presença visual semelhante. */
+.trip-detail-top-area>* {
+  min-height: 450px !important;
+}
+
+/* A coluna direita continua empilhada, mas ocupa toda a altura do topo. */
+.trip-detail-top-area> :last-child {
+  display: flex !important;
+  min-height: 450px !important;
+  flex-direction: column !important;
+}
+
+.trip-detail-top-area> :last-child> :last-child {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+}
+
+.trip-detail-crew-section {
+  box-sizing: border-box;
+  width: 100% !important;
+  min-height: 410px !important;
+  height: auto !important;
+  padding-bottom: 24px !important;
+  overflow: visible !important;
+}
+
+.crew-strip {
+  min-height: 340px !important;
+  align-items: flex-start !important;
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  padding-top: 2px !important;
+  padding-bottom: 18px !important;
+}
+
+/* Evita que um pai flex/grid comprima os cards verticalmente. */
+.crew-strip>* {
+  flex-shrink: 0 !important;
+}
+
+@media (min-width: 1600px) {
+  .trip-detail-main {
+    width: min(95%, 1680px) !important;
+  }
+}
+
+@media (max-width: 1280px) {
+  .trip-detail-main {
+    width: calc(100% - 36px) !important;
+    padding-top: 10px !important;
+  }
+
+  .trip-detail-top-area,
+  .trip-detail-top-area>*,
+  .trip-detail-top-area> :last-child {
+    min-height: 420px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .trip-detail-main {
+    width: calc(100% - 28px) !important;
+    padding-top: 10px !important;
+  }
+
+  .trip-detail-top-area,
+  .trip-detail-top-area>*,
+  .trip-detail-top-area> :last-child {
+    min-height: 0 !important;
+  }
+
+  .trip-detail-crew-section {
+    min-height: 390px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .trip-detail-main {
+    width: calc(100% - 20px) !important;
+    padding-top: 8px !important;
+    padding-bottom: 28px !important;
+  }
+
+  .trip-detail-first-fold {
+    gap: 12px !important;
+  }
+
+  .trip-detail-top-area {
+    gap: 12px !important;
+  }
+
+  .trip-detail-crew-section {
+    min-height: 370px !important;
+    padding-bottom: 18px !important;
+  }
+
+  .crew-strip {
+    min-height: 330px !important;
+    padding-bottom: 14px !important;
   }
 }
