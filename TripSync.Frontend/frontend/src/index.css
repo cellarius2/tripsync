@@ -2908,8 +2908,8 @@ html.dark,
 ========================================================= */
 .trip-detail-main {
   box-sizing: border-box;
-  width: calc(100% - 48px);
-  max-width: 1580px;
+  width: min(94%, 1640px);
+  max-width: 1640px;
   margin-inline: auto;
   padding-inline: 0;
 }
@@ -2924,7 +2924,7 @@ html.dark,
 
 @media (min-width: 1600px) {
   .trip-detail-main {
-    width: min(calc(100% - 96px), 1580px);
+    width: min(94%, 1640px);
   }
 }
 

@@ -23,7 +23,7 @@ export default function CrewMemberCard({
 
   return (
     <article
-      className={`relative flex min-h-[318px] w-[220px] shrink-0 flex-col overflow-hidden rounded-[1.25rem] border bg-[color:var(--surface)]/90 px-3 py-3 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-[var(--shadow)] ${highlighted
+      className={`relative flex min-h-[340px] w-[230px] shrink-0 flex-col overflow-hidden rounded-[1.25rem] border bg-[color:var(--surface)]/90 px-3 py-3 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-[var(--shadow)] ${highlighted
           ? "border-[color:var(--accent)] shadow-[var(--trip-shadow)]"
           : "border-[color:var(--border)] hover:border-[color:var(--accent)]"
         }`}
@@ -46,7 +46,7 @@ export default function CrewMemberCard({
                 name={participant.name}
                 avatarKey={participant.avatarKey}
                 size="lg"
-                className="!h-28 !w-28"
+                className="!h-32 !w-32"
               />
             ) : (
               <AvatarInitial name={participant.name} />
@@ -113,7 +113,7 @@ function AvatarInitial({ name }: { name?: string }) {
   return (
     <div
       aria-label={name ? `Avatar de ${name}` : "Avatar do tripulante"}
-      className="flex h-28 w-28 items-center justify-center bg-[radial-gradient(circle_at_35%_28%,rgba(255,255,255,0.34),transparent_34%),linear-gradient(135deg,var(--trip-accent-soft),color-mix(in_srgb,var(--trip-accent)_16%,var(--surface)))] text-4xl font-black uppercase tracking-[-0.08em] text-[color:var(--accent)]"
+      className="flex h-32 w-32 items-center justify-center bg-[radial-gradient(circle_at_35%_28%,rgba(255,255,255,0.34),transparent_34%),linear-gradient(135deg,var(--trip-accent-soft),color-mix(in_srgb,var(--trip-accent)_16%,var(--surface)))] text-5xl font-black uppercase tracking-[-0.08em] text-[color:var(--accent)]"
     >
       {initial}
     </div>

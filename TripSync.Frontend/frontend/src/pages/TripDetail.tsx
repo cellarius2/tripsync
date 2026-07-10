@@ -435,8 +435,8 @@ export default function TripDetail() {
 
         <main className="trip-detail-main relative z-10 mx-auto flex flex-col gap-5 pb-10 pt-5 lg:pt-6">
           <div className="trip-detail-first-fold flex flex-col gap-5">
-            <section className="trip-detail-top-area grid w-full items-stretch gap-5 min-[900px]:grid-cols-[minmax(0,1.7fr)_minmax(360px,0.9fr)]">
-              <div className="trip-panel relative min-h-[340px] overflow-hidden rounded-[1.45rem] px-5 py-5 sm:px-7 lg:min-h-[360px] lg:px-8 lg:py-7">
+            <section className="trip-detail-top-area grid w-full items-stretch gap-5 min-[900px]:grid-cols-[minmax(0,1.75fr)_minmax(420px,0.95fr)]">
+              <div className="trip-panel relative min-h-[420px] overflow-hidden rounded-[1.45rem] p-6 md:p-8 lg:min-h-[430px] lg:p-9">
                 <div className="trip-route-grid pointer-events-none absolute inset-0" />
                 <div className="pointer-events-none absolute -left-20 top-14 h-56 w-56 rounded-full border border-[color:var(--trip-accent-mid)] opacity-80" />
                 <div className="pointer-events-none absolute -left-12 top-28 h-32 w-32 rotate-45 border-l border-t border-[color:var(--trip-accent-mid)] opacity-70" />
@@ -516,7 +516,7 @@ export default function TripDetail() {
               </div>
             </section>
 
-            <section className="trip-panel trip-detail-crew-section w-full rounded-[1.75rem] p-5 md:p-6">
+            <section className="trip-panel trip-detail-crew-section min-h-[340px] w-full rounded-[1.75rem] p-5 md:p-6">
               <div className="mb-4 flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                 <div>
                   <h2 className="flex items-center gap-3 font-display text-xl font-semibold uppercase tracking-[0.18em] text-[color:var(--text)]">
@@ -795,7 +795,7 @@ function FinancialHeroSummaryCard({
       type="button"
       onClick={onOpen}
       aria-label="Abrir planejamento financeiro"
-      className="trip-panel group flex min-h-[260px] flex-1 flex-col justify-between rounded-[1.35rem] p-5 text-left transition hover:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/70"
+      className="trip-panel group flex min-h-[360px] flex-1 flex-col justify-between rounded-[1.35rem] p-5 text-left transition hover:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/70"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
