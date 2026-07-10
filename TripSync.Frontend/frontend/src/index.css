@@ -9455,28 +9455,28 @@ html.dark .landing-shell .orbit-logo-card {
 }
 
 .trip-detail-first-fold {
-  gap: 16px !important;
+  gap: 12px !important;
   min-height: 0 !important;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 
 .trip-detail-top-area {
-  min-height: 450px !important;
+  min-height: 0 !important;
   align-items: stretch !important;
-  gap: 20px !important;
+  gap: 16px !important;
   overflow: visible !important;
 }
 
 /* Mantém os dois lados do topo com presença visual semelhante. */
 .trip-detail-top-area>* {
-  min-height: 450px !important;
+  min-height: 0 !important;
 }
 
 /* A coluna direita continua empilhada, mas ocupa toda a altura do topo. */
 .trip-detail-top-area> :last-child {
   display: flex !important;
-  min-height: 450px !important;
+  min-height: 0 !important;
   flex-direction: column !important;
 }
 
@@ -9488,8 +9488,9 @@ html.dark .landing-shell .orbit-logo-card {
 .trip-detail-crew-section {
   box-sizing: border-box;
   width: 100% !important;
-  min-height: 410px !important;
+  min-height: 340px !important;
   height: auto !important;
+  margin-top: -8px !important;
   padding-bottom: 24px !important;
   overflow: visible !important;
 }
@@ -9523,7 +9524,7 @@ html.dark .landing-shell .orbit-logo-card {
   .trip-detail-top-area,
   .trip-detail-top-area>*,
   .trip-detail-top-area> :last-child {
-    min-height: 420px !important;
+    min-height: 0 !important;
   }
 }
 
@@ -9540,7 +9541,8 @@ html.dark .landing-shell .orbit-logo-card {
   }
 
   .trip-detail-crew-section {
-    min-height: 390px !important;
+    min-height: 340px !important;
+    margin-top: 0 !important;
   }
 }
 
@@ -9560,7 +9562,8 @@ html.dark .landing-shell .orbit-logo-card {
   }
 
   .trip-detail-crew-section {
-    min-height: 370px !important;
+    min-height: 340px !important;
+    margin-top: 0 !important;
     padding-bottom: 18px !important;
   }
 

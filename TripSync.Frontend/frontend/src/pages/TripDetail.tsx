@@ -436,7 +436,7 @@ export default function TripDetail() {
         <main className="trip-detail-main relative z-10 mx-auto flex flex-col gap-5 pb-10 pt-5 lg:pt-6">
           <div className="trip-detail-first-fold flex flex-col gap-5">
             <section className="trip-detail-top-area grid w-full items-stretch gap-5 min-[900px]:grid-cols-[minmax(0,1.75fr)_minmax(420px,0.95fr)]">
-              <div className="trip-panel relative min-h-[420px] overflow-hidden rounded-[1.45rem] p-6 md:p-8 lg:min-h-[430px] lg:p-9">
+              <div className="trip-panel relative h-auto overflow-hidden rounded-[1.45rem] p-6 pb-6 md:p-8 md:pb-6 lg:p-8 lg:pb-6">
                 <div className="trip-route-grid pointer-events-none absolute inset-0" />
                 <div className="pointer-events-none absolute -left-20 top-14 h-56 w-56 rounded-full border border-[color:var(--trip-accent-mid)] opacity-80" />
                 <div className="pointer-events-none absolute -left-12 top-28 h-32 w-32 rotate-45 border-l border-t border-[color:var(--trip-accent-mid)] opacity-70" />
