@@ -90,7 +90,14 @@ export default function AvatarPickerModal({
                 disabled={loading}
               >
                 <span className="avatar-picker-image">
-                  <img src={avatar.src} alt="" />
+                  <img
+                    src={avatar.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width={220}
+                    height={220}
+                  />
                 </span>
 
                 {selected && (

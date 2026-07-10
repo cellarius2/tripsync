@@ -23,7 +23,7 @@ export default function CrewMemberCard({
 
   return (
     <article
-      className={`relative flex min-h-[380px] w-[240px] shrink-0 flex-col overflow-hidden rounded-[1.45rem] border bg-[color:var(--surface)]/90 px-4 py-4 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-[var(--shadow)] ${highlighted
+      className={`relative flex min-h-[318px] w-[220px] shrink-0 flex-col overflow-hidden rounded-[1.25rem] border bg-[color:var(--surface)]/90 px-3 py-3 shadow-sm backdrop-blur-md transition hover:-translate-y-0.5 hover:shadow-[var(--shadow)] ${highlighted
           ? "border-[color:var(--accent)] shadow-[var(--trip-shadow)]"
           : "border-[color:var(--border)] hover:border-[color:var(--accent)]"
         }`}
@@ -36,17 +36,17 @@ export default function CrewMemberCard({
           type="button"
           onClick={canEditAvatar ? onEditAvatar : undefined}
           disabled={!canEditAvatar}
-          className={`mx-auto flex flex-col items-center rounded-[1.35rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--surface)] ${canEditAvatar ? "cursor-pointer transition hover:-translate-y-0.5" : "cursor-default"
+          className={`mx-auto flex flex-col items-center rounded-[1.2rem] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--surface)] ${canEditAvatar ? "cursor-pointer transition hover:-translate-y-0.5" : "cursor-default"
             }`}
           title={canEditAvatar ? "Trocar avatar" : undefined}
         >
-          <div className="overflow-hidden rounded-[1.25rem] border border-[color:var(--accent)] shadow-[0_14px_30px_color-mix(in_srgb,var(--trip-accent)_18%,transparent)]">
+          <div className="overflow-hidden rounded-[1.1rem] border border-[color:var(--accent)] shadow-[0_12px_24px_color-mix(in_srgb,var(--trip-accent)_16%,transparent)]">
             {hasCustomAvatar ? (
               <ParticipantAvatar
                 name={participant.name}
                 avatarKey={participant.avatarKey}
                 size="lg"
-                className="!h-40 !w-40"
+                className="!h-28 !w-28"
               />
             ) : (
               <AvatarInitial name={participant.name} />
@@ -59,7 +59,7 @@ export default function CrewMemberCard({
             <button
               type="button"
               onClick={onEditAvatar}
-              className="whitespace-nowrap rounded-full border border-[color:var(--accent)] bg-[color:var(--surface)] px-3 py-1 text-[9px] font-black uppercase tracking-[0.1em] text-[color:var(--accent)] shadow-sm transition hover:bg-[color:var(--accent-soft)]"
+              className="whitespace-nowrap rounded-full border border-[color:var(--accent)] bg-[color:var(--surface)] px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.1em] text-[color:var(--accent)] shadow-sm transition hover:bg-[color:var(--accent-soft)]"
             >
               Trocar avatar
             </button>
@@ -67,9 +67,9 @@ export default function CrewMemberCard({
         </div>
       </div>
 
-      <div className="relative mt-2 text-center">
+      <div className="relative mt-1 text-center">
         <div className="flex min-w-0 items-center justify-center gap-2">
-          <h3 className="truncate font-display text-xl font-semibold leading-none text-[color:var(--text)]">
+          <h3 className="truncate font-display text-base font-semibold leading-none text-[color:var(--text)]">
             {participant.name || "Tripulante"}
           </h3>
 
@@ -80,23 +80,23 @@ export default function CrewMemberCard({
           )}
         </div>
 
-        <p className="mt-2 text-xs font-semibold text-[color:var(--accent)]">{role}</p>
+        <p className="mt-1.5 text-[11px] font-semibold text-[color:var(--accent)]">{role}</p>
       </div>
 
       <div className="relative mt-auto">
-        <div className="mb-4 h-px w-full bg-[color:var(--border)]" />
+        <div className="mb-2.5 h-px w-full bg-[color:var(--border)]" />
 
         <div className="grid grid-cols-2 divide-x divide-[color:var(--border)]">
           <Info label="Valor guardado" value={formatCurrency(participant.amountSaved)} />
           <Info label="Meta estimada" value={formatCurrency(valuePerPerson)} />
         </div>
 
-        <div className="my-4 h-px w-full bg-[color:var(--border)]" />
+        <div className="my-2.5 h-px w-full bg-[color:var(--border)]" />
 
         <button
           type="button"
           onClick={onTomato}
-          className="flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--accent)] bg-[radial-gradient(circle_at_20%_50%,var(--trip-accent-soft),transparent_42%),color-mix(in_srgb,var(--surface-soft)_88%,transparent)] px-5 py-3 text-sm font-black text-[color:var(--accent)] transition hover:bg-[color:var(--accent-soft)] hover:shadow-[0_0_26px_var(--trip-accent-soft)]"
+          className="flex w-full items-center justify-center gap-2 rounded-full border border-[color:var(--accent)] bg-[radial-gradient(circle_at_20%_50%,var(--trip-accent-soft),transparent_42%),color-mix(in_srgb,var(--surface-soft)_88%,transparent)] px-4 py-2 text-xs font-black text-[color:var(--accent)] transition hover:bg-[color:var(--accent-soft)] hover:shadow-[0_0_22px_var(--trip-accent-soft)]"
         >
           <span className="text-base">🍅</span>
           <span>Jogar tomate</span>
@@ -113,7 +113,7 @@ function AvatarInitial({ name }: { name?: string }) {
   return (
     <div
       aria-label={name ? `Avatar de ${name}` : "Avatar do tripulante"}
-      className="flex h-40 w-40 items-center justify-center bg-[radial-gradient(circle_at_35%_28%,rgba(255,255,255,0.34),transparent_34%),linear-gradient(135deg,var(--trip-accent-soft),color-mix(in_srgb,var(--trip-accent)_16%,var(--surface)))] text-6xl font-black uppercase tracking-[-0.08em] text-[color:var(--accent)]"
+      className="flex h-28 w-28 items-center justify-center bg-[radial-gradient(circle_at_35%_28%,rgba(255,255,255,0.34),transparent_34%),linear-gradient(135deg,var(--trip-accent-soft),color-mix(in_srgb,var(--trip-accent)_16%,var(--surface)))] text-4xl font-black uppercase tracking-[-0.08em] text-[color:var(--accent)]"
     >
       {initial}
     </div>
@@ -127,7 +127,7 @@ function Info({ label, value }: { label: string; value: string }) {
         {label}
       </p>
 
-      <p className="mt-2 truncate font-mono text-sm font-black text-[color:var(--text)]">
+      <p className="mt-1.5 truncate font-mono text-xs font-black text-[color:var(--text)]">
         {value}
       </p>
     </div>

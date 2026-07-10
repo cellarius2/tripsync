@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("tripsync-theme") as "dark" | "light" | null;
-    const initialTheme = savedTheme ?? "dark";
+    const initialTheme = savedTheme === "dark" ? "dark" : "light";
 
     setTheme(initialTheme);
     document.documentElement.classList.toggle("dark", initialTheme === "dark");
-    localStorage.setItem("tripsync-theme", initialTheme);
+    document.documentElement.setAttribute("data-theme", initialTheme);
   }, []);
 
   function toggleTheme() {
@@ -17,6 +17,7 @@ export default function ThemeToggle() {
     setTheme(nextTheme);
     localStorage.setItem("tripsync-theme", nextTheme);
     document.documentElement.classList.toggle("dark", nextTheme === "dark");
+    document.documentElement.setAttribute("data-theme", nextTheme);
   }
 
   return (

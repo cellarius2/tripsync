@@ -13,14 +13,10 @@ import TripDetail from "./pages/TripDetail";
 export default function App() {
   useEffect(() => {
     const savedTheme = localStorage.getItem("tripsync-theme");
+    const initialTheme = savedTheme === "dark" ? "dark" : "light";
 
-    if (!savedTheme) {
-      localStorage.setItem("tripsync-theme", "dark");
-      document.documentElement.classList.add("dark");
-      return;
-    }
-
-    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+    document.documentElement.classList.toggle("dark", initialTheme === "dark");
+    document.documentElement.setAttribute("data-theme", initialTheme);
   }, []);
 
   return (

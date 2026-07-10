@@ -6,14 +6,12 @@ export type AvatarKey =
   | "koala"
   | "cockatiel";
 
-export interface AvatarOption {
+export const avatarOptions: Array<{
   key: AvatarKey;
   label: string;
   role: string;
   src: string;
-}
-
-export const avatarOptions: AvatarOption[] = [
+}> = [
   {
     key: "dog",
     label: "Cachorro capitão",
@@ -52,8 +50,6 @@ export const avatarOptions: AvatarOption[] = [
   },
 ];
 
-export function getAvatarByKey(
-  key?: string | null
-): AvatarOption | undefined {
+export function getAvatarByKey(key?: string | null) {
   return avatarOptions.find((avatar) => avatar.key === key);
 }

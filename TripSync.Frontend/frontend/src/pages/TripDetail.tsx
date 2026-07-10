@@ -433,10 +433,10 @@ export default function TripDetail() {
           onSave={updateMyAvatar}
         />
 
-        <main className="trip-detail-main mx-auto pb-0 pt-6 lg:pb-0 lg:pt-8">
-          <div className="trip-detail-first-fold flex min-h-[calc(100svh-92px)] flex-col gap-5 pb-4">
+        <main className="trip-detail-main mx-auto flex flex-col gap-6 pb-8 pt-6 lg:gap-8 lg:pb-10 lg:pt-8">
+          <div className="trip-detail-first-fold flex flex-col gap-5">
             <section className="trip-detail-top-area grid gap-4 lg:gap-6 lg:grid-cols-[minmax(0,1.7fr)_minmax(420px,0.9fr)] 2xl:grid-cols-[minmax(0,1.75fr)_minmax(460px,0.88fr)]">
-              <div className="trip-panel relative min-h-[340px] overflow-hidden rounded-[1.45rem] px-5 py-5 sm:px-7 lg:px-10 lg:py-7">
+              <div className="trip-panel relative overflow-hidden rounded-[1.45rem] px-5 py-5 sm:px-7 lg:px-7 lg:py-6">
                 <div className="trip-route-grid pointer-events-none absolute inset-0" />
                 <div className="pointer-events-none absolute -left-20 top-14 h-56 w-56 rounded-full border border-[color:var(--trip-accent-mid)] opacity-80" />
                 <div className="pointer-events-none absolute -left-12 top-28 h-32 w-32 rotate-45 border-l border-t border-[color:var(--trip-accent-mid)] opacity-70" />
@@ -444,7 +444,7 @@ export default function TripDetail() {
                 <div className="pointer-events-none absolute left-28 top-15 h-2 w-2 rotate-45 bg-[color:var(--trip-accent)] opacity-45" />
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--trip-accent-mid)] to-transparent" />
 
-                <div className="relative flex h-full min-h-[292px] min-w-0 flex-col justify-between">
+                <div className="relative flex min-w-0 flex-col justify-between">
                   <div className="min-w-0">
                     <span className="rounded-md bg-[color:var(--trip-button-bg)] px-3.5 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.22em] text-[color:var(--trip-button-text)] shadow-lg shadow-[var(--trip-shadow)]">
                       CENTRO DE COMANDO
@@ -544,7 +544,7 @@ export default function TripDetail() {
                   text="Compartilhe o código de convite para seus amigos entrarem na viagem."
                 />
               ) : (
-                <div className="crew-strip flex max-w-full flex-wrap justify-start gap-5 overflow-x-auto pb-2 pr-4">
+                <div className="crew-strip flex max-w-full flex-nowrap justify-start gap-4 overflow-x-auto pb-2 pr-4">
                   {orderedParticipants.map((participant) => {
                     const participantProgress = findParticipantProgress(participant, organizationParticipants);
                     const savedAmount = firstDefinedNumber(
@@ -581,7 +581,7 @@ export default function TripDetail() {
             showTrigger={false}
           />
 
-          <section className="trip-panel mt-4 flex min-h-[calc(100svh-104px)] scroll-mt-4 flex-col rounded-[2rem] p-4 sm:p-5 lg:mt-6 lg:p-5">
+          <section className="trip-panel flex scroll-mt-4 flex-col rounded-[1.5rem] p-4 sm:p-5 lg:p-5">
             <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
               <div>
 
@@ -602,7 +602,7 @@ export default function TripDetail() {
               </button>
             </div>
 
-            <div className="grid flex-1 items-stretch gap-3 xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.9fr)]">
+            <div className="grid items-start gap-3 xl:grid-cols-[minmax(0,1.45fr)_minmax(360px,0.9fr)]">
               <OrganizationCard className="min-h-[172px]">
                 <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                   <div>
@@ -795,7 +795,7 @@ function FinancialHeroSummaryCard({
       type="button"
       onClick={onOpen}
       aria-label="Abrir planejamento financeiro"
-      className="trip-panel group flex min-h-[300px] flex-1 flex-col justify-between rounded-[1.35rem] p-6 text-left transition hover:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/70"
+      className="trip-panel group flex flex-col justify-between rounded-[1.35rem] p-5 text-left transition hover:border-[color:var(--accent)] focus:outline-none focus:ring-2 focus:ring-[color:var(--accent)]/70"
     >
       <div className="flex items-start justify-between gap-3">
         <div>
@@ -854,7 +854,7 @@ function OrganizationCard({
   className?: string;
 }) {
   return (
-    <article className={`trip-panel-soft flex h-full min-w-0 flex-col rounded-[1.5rem] p-4 shadow-sm ${className}`}>
+    <article className={`trip-panel-soft flex min-w-0 flex-col rounded-[1.5rem] p-4 shadow-sm ${className}`}>
       {children}
     </article>
   );

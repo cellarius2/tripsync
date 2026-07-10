@@ -9,7 +9,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">("light");
 
   const isCreateTripPage =
     location.pathname === "/trips/new" ||
@@ -41,12 +41,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("tripsync-theme") as "dark" | "light" | null;
-    const initialTheme = savedTheme ?? "dark";
+    const initialTheme = savedTheme === "dark" ? "dark" : "light";
 
     setTheme(initialTheme);
     document.documentElement.classList.toggle("dark", initialTheme === "dark");
     document.documentElement.setAttribute("data-theme", initialTheme);
-    localStorage.setItem("tripsync-theme", initialTheme);
   }, []);
 
   function toggleTheme() {
