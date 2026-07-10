@@ -1,10 +1,3 @@
-import dogAvatar from "../assets/dog.png";
-import catAvatar from "../assets/cat.png";
-import penguinAvatar from "../assets/penguim.png";
-import turtleAvatar from "../assets/turtle.png";
-import koalaAvatar from "../assets/koala.png";
-import cockatielAvatar from "../assets/cockatiel.png";
-
 export type AvatarKey =
   | "dog"
   | "cat"
@@ -13,50 +6,54 @@ export type AvatarKey =
   | "koala"
   | "cockatiel";
 
-export const avatarOptions: Array<{
+export interface AvatarOption {
   key: AvatarKey;
   label: string;
   role: string;
   src: string;
-}> = [
+}
+
+export const avatarOptions: AvatarOption[] = [
   {
     key: "dog",
     label: "Cachorro capitão",
     role: "Capitão da viagem",
-    src: dogAvatar,
+    src: "/avatars/dog.webp",
   },
   {
     key: "cat",
     label: "Gato explorador",
     role: "Explorador",
-    src: catAvatar,
+    src: "/avatars/cat.webp",
   },
   {
     key: "penguin",
     label: "Pinguim navegador",
     role: "Navegador",
-    src: penguinAvatar,
+    src: "/avatars/penguin.webp",
   },
   {
     key: "turtle",
     label: "Tartaruga organizadora",
     role: "Organizadora",
-    src: turtleAvatar,
+    src: "/avatars/turtle.webp",
   },
   {
     key: "koala",
     label: "Coala documentarista",
     role: "Documentarista",
-    src: koalaAvatar,
+    src: "/avatars/koala.webp",
   },
   {
     key: "cockatiel",
     label: "Calopsita viajante",
     role: "Companheira de rota",
-    src: cockatielAvatar,
+    src: "/avatars/cockatiel.webp",
   },
 ];
 
-export function getAvatarByKey(key?: string | null) {
+export function getAvatarByKey(
+  key?: string | null
+): AvatarOption | undefined {
   return avatarOptions.find((avatar) => avatar.key === key);
 }

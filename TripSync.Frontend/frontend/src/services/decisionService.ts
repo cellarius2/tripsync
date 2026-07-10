@@ -1,5 +1,4 @@
 import api from "./api";
-
 export interface TripDecision {
   id: string;
   category: number;

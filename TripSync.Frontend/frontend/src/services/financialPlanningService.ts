@@ -1,5 +1,4 @@
 import api from "./api";
-
 export interface TravelBudget {
   transportationAmount: number;
   accommodationAmount: number;
